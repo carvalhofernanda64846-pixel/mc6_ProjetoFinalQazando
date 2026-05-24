@@ -1,3 +1,5 @@
+const creds = require('../cypress/fixtures/credentials.json');
+
 describe('Login - Projeto Final MC6', () => {
   beforeEach(() => {
     cy.visit('https://ingles-qazando.lovable.app/');
@@ -6,8 +8,8 @@ describe('Login - Projeto Final MC6', () => {
   });
 
   it('Deve fazer login com sucesso usando credenciais válidas', () => {
-    cy.get('input[type="email"]').should('be.visible').clear().type('admin@teste.com');
-    cy.get('input[type="password"]').should('be.visible').clear().type('Teste@123');
+    cy.get('input[type="email"]').should('be.visible').clear().type(creds.admin.email);
+    cy.get('input[type="password"]').should('be.visible').clear().type(creds.admin.password);
 
     cy.contains('button', 'Entrar').should('be.visible').click();
 
@@ -26,7 +28,7 @@ describe('Login - Projeto Final MC6', () => {
   });
 
   it('Não deve fazer login com senha incorreta', () => {
-    cy.get('input[type="email"]').should('be.visible').clear().type('admin@teste.com');
+    cy.get('input[type="email"]').should('be.visible').clear().type(creds.admin.email);
     cy.get('input[type="password"]').should('be.visible').clear().type('senha-incorreta');
 
     cy.contains('button', 'Entrar').should('be.visible').click();
@@ -44,7 +46,7 @@ describe('Login - Projeto Final MC6', () => {
   });
 
   it('Não deve fazer login com senha vazia', () => {
-    cy.get('input[type="email"]').should('be.visible').clear().type('admin@teste.com');
+    cy.get('input[type="email"]').should('be.visible').clear().type(creds.admin.email);
     cy.get('input[type="password"]').should('be.visible').clear();
 
     cy.contains('button', 'Entrar').should('be.visible').click();
